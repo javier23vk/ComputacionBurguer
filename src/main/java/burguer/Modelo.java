@@ -1,4 +1,3 @@
-	public void doInitialSchedules() {
 package burguer;
 import desmoj.core.simulator.*;
 import desmoj.core.dist.*;
