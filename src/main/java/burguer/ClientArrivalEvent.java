@@ -6,14 +6,22 @@ import desmoj.core.simulator.Model;
 
 public class ClientArrivalEvent extends Event<Cliente> {
 
+	private Modelo myModel;
+
 	public ClientArrivalEvent(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void eventRoutine(Cliente arg0) throws SuspendExecution {
-		// TODO Auto-generated method stub
+	public void eventRoutine(Cliente cli) throws SuspendExecution {
+	myModel.colaClientes.insert(cli);
+    sendTraceNote("ClientQueueLength: "+ myModel.colaClientes.length());
+    if(!myModel.colaDependientes.isEmpty())
+    {
+    	
+    }
+
 
 	}
 
