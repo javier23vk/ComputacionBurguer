@@ -1,8 +1,11 @@
 package burguer;
 
+import java.util.concurrent.TimeUnit;
+
 import co.paralleluniverse.fibers.SuspendExecution;
 import desmoj.core.simulator.Event;
 import desmoj.core.simulator.Model;
+import desmoj.core.simulator.TimeSpan;
 
 public class ClientArrivalEvent extends Event<Cliente> {
 
@@ -19,7 +22,14 @@ public class ClientArrivalEvent extends Event<Cliente> {
     sendTraceNote("ClientQueueLength: "+ myModel.colaClientes.length());
     if(!myModel.colaDependientes.isEmpty())
     {
+    	Dependiente dep= myModel.colaDependientes.first();
+    	myModel.colaDependientes.remove(dep);
     	
+    	myModel.colaClientes.remove(cli);
+    	ServiceEndEvent serviceEnd = new ServiceEndEvent(myModel,
+                "ServiceEndEvent", true);
+        serviceEnd.schedule(dep, cli, new TimeSpan(myModel.getServiceTime(), TimeUnit.MINUTES));
+
     }
 
 
