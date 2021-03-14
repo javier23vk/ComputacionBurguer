@@ -1,5 +1,8 @@
 package burguer;
 import desmoj.core.simulator.*;
+
+import java.util.concurrent.TimeUnit;
+
 import desmoj.core.dist.*;
 public class Modelo extends Model {
 
@@ -24,7 +27,10 @@ public class Modelo extends Model {
 
 	@Override
 	public void doInitialSchedules() {
-		// TODO Auto-generated method stub
+		GeneradorEventoClientes clienteGenerator =
+	            new GeneradorEventoClientes(this, "Cliente Generator", true);
+	   
+		clienteGenerator.schedule(new TimeSpan(0), TimeUnit.MINUTES);
 		
 	}
 
@@ -47,12 +53,18 @@ public class Modelo extends Model {
 		colaCocineros = new Queue<Cocinero>(this, "Cocineros Queue", true, true);
 		
 		Dependiente dep;
-		   for (int i = 0; i < NUM_DEPENDIENTES ; i++)
-		   {
-			   dep = new VanCarrier(this, "VanCarrier", true);
-		      // put it on his parking spot
-		      idleVCQueue.insert(VC);
-		   }
+		for (int i = 0; i < NUM_DEPENDIENTES ; i++)
+		{
+			   dep = new Dependiente(this, "Dependiente", true);
+		       colaDependientes.insert(dep);
+		 }
+		
+		Cocinero coc;
+		for (int i = 0; i < NUM_COCINEROS ; i++)
+		{
+			   coc = new Cocinero(this, "Cocinero", true);
+		       colaCocineros.insert(coc);
+		 }
 	}
 
 	
@@ -71,5 +83,18 @@ public class Modelo extends Model {
 		return TiempoServicioCocineros.sample();
 	}
 	
-	
+	public static void main(java.lang.String[] args) {
+
+		  
+		Modelo model = new Modelo(null, "Burguer Model", true, true);
+		Experiment exp = new Experiment("BurguerExperiment");
+		model.connectToExperiment(exp);
+		exp.setShowProgressBar(true); 
+		exp.stop(new TimeInstant(1500, TimeUnit.MINUTES));   
+		exp.tracePeriod(new TimeInstant(0), new TimeInstant(100, TimeUnit.MINUTES));
+		exp.debugPeriod(new TimeInstant(0), new TimeInstant(50, TimeUnit.MINUTES));
+		exp.start();
+		exp.report();
+		exp.finish();
+	}
 }
