@@ -21,7 +21,7 @@ public class GeneradorEventoClientes extends ExternalEvent{
 		EventoLlegadaCliente eventoLlegadaCliente = new EventoLlegadaCliente(model,
                 "eventoLlegadaCliente", true);
 		eventoLlegadaCliente.schedule(cliente, new TimeSpan(0, TimeUnit.MINUTES));
-		 schedule(new TimeSpan(model.getTiempoLlegadaClientes(), TimeUnit.MINUTES));
+		schedule(new TimeSpan(model.getTiempoLlegadaClientes(), TimeUnit.MINUTES));
 	}
 
 }
