@@ -12,8 +12,8 @@ public class Modelo extends Model {
 	protected Queue<Dependiente> colaDependientes;
 	protected Queue<Cocinero> colaCocineros;
 	
-	public Modelo(Model arg0, String arg1, boolean arg2, boolean arg3) {
-		super(arg0, arg1, arg2, arg3);
+	public Modelo(Model model, String modelName , boolean showInReport, boolean showInTrace) {
+		super(model, modelName, showInReport, showInTrace);
 		
 	}
 
