@@ -19,7 +19,7 @@ public class ClienteGenerator extends ExternalEvent {
 		Cliente cli= new Cliente(model, "Cliente",true);
 		ClientArrivalEvent clientArrival= new ClientArrivalEvent(model,"ClientArrivalEvent",true);
 		clientArrival.schedule(cli,new TimeSpan(0, TimeUnit.MINUTES));
-	    schedule(new TimeSpan(model.getClientArrivalTime(), TimeUnit.MINUTES));
+	    schedule(new TimeSpan(model.getTiempoLlegadaClientes(), TimeUnit.MINUTES));
 
 	}
 
