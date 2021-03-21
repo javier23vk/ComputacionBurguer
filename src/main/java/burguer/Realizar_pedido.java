@@ -6,11 +6,11 @@ import desmoj.core.simulator.EventOf2Entities;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
 
-public class ServiceEndEvent extends EventOf2Entities<Dependiente, Cliente> {
+public class Realizar_pedido extends EventOf2Entities<Dependiente, Cliente> {
 
 	private Modelo myModel;
 
-	public ServiceEndEvent(Model owner, String name, boolean showInTrace) {
+	public Realizar_pedido(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
 		myModel = (Modelo)owner;
 	}
@@ -22,7 +22,7 @@ public class ServiceEndEvent extends EventOf2Entities<Dependiente, Cliente> {
 	    	  // remove the first waiting truck from the queue
 	          Cliente nextClient = myModel.colaClientes.first();
 	          myModel.colaClientes.remove(nextClient);
-	          ServiceEndEvent event = new ServiceEndEvent(myModel, "ServiceEndEvent", true);
+	          Realizar_pedido event = new Realizar_pedido(myModel, "ServiceEndEvent", true);
 	          // and schedule it for at the appropriate time
 	          event.schedule(dep, nextClient, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
 	      }

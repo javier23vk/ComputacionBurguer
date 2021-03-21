@@ -1,6 +1,5 @@
 package burguer;
 
-import desmoj.core.simulator.ExternalEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +19,5 @@ public class ClienteGenerator extends ExternalEvent {
 		ClientArrivalEvent clientArrival= new ClientArrivalEvent(model,"ClientArrivalEvent",true);
 		clientArrival.schedule(cli,new TimeSpan(0, TimeUnit.MINUTES));
 	    schedule(new TimeSpan(model.getTiempoLlegadaClientes(), TimeUnit.MINUTES));
-
 	}
-
 }
