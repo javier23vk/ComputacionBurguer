@@ -6,11 +6,11 @@ import desmoj.core.simulator.EventOf2Entities;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
 
-public class Realizar_pedido extends EventOf2Entities<Dependiente, Cliente> {
+public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 
 	private Modelo myModel;
 
-	public Realizar_pedido(Model owner, String name, boolean showInTrace) {
+	public RealizarPedido(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
 		myModel = (Modelo)owner;
 	}
