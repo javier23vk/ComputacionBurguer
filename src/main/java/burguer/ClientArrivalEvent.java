@@ -26,8 +26,7 @@ public class ClientArrivalEvent extends Event<Cliente> {
     	myModel.colaDependientes.remove(dep);
     	
     	myModel.colaClientes.remove(cli);
-    	RealizarPedido serviceEnd = new RealizarPedido(myModel,
-                "ServiceEndEvent", true);
+    	RealizarPedido serviceEnd = new RealizarPedido(myModel,"ServiceEndEvent", true);
         serviceEnd.schedule(dep, cli, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
 
     }

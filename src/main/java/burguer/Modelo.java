@@ -16,7 +16,14 @@ public class Modelo extends Model {
 	protected Queue<Cliente> colaClientes;
 	protected Queue<Dependiente> colaDependientes;
 	protected Queue<Cocinero> colaCocineros;
-	
+
+	protected Queue<Cliente> colaClientesEsperandoComida;
+	protected Queue<Dependiente> colaDependientesEsperandoComida;
+	protected Queue<Cliente> colaDependienteEsperandoPago;
+
+
+
+
 	public Modelo(Model model, String modelName , boolean showInReport, boolean showInTrace) {
 		super(model, modelName, showInReport, showInTrace);
 	}
