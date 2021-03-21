@@ -22,12 +22,14 @@ public class Realizar_pedido extends EventOf2Entities<Dependiente, Cliente> {
 	    	  // remove the first waiting truck from the queue
 	          Cliente nextClient = myModel.colaClientes.first();
 	          myModel.colaClientes.remove(nextClient);
-	          Realizar_pedido event = new Realizar_pedido(myModel, "ServiceEndEvent", true);
+	          
+	          //Realizar_pedido event = new Realizar_pedido(myModel, "ServiceEndEvent", true);
+	          PagarPedido event =  new PagarPedido(myModel, "PagarPedidoEvent", true);
 	          // and schedule it for at the appropriate time
 	          event.schedule(dep, nextClient, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
 	      }
 	      else {
-	          // NO, there are no trucks waiting
+	          // NO, there are no clientes waiting
 
 	          // --> the van carrier is placed on its parking spot
 	          myModel.colaDependientes.insert(dep);
