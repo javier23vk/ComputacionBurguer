@@ -19,7 +19,6 @@ public class Modelo extends Model {
 	
 	public Modelo(Model model, String modelName , boolean showInReport, boolean showInTrace) {
 		super(model, modelName, showInReport, showInTrace);
-		
 	}
 
 	@Override
@@ -33,7 +32,6 @@ public class Modelo extends Model {
 	            new ClienteGenerator(this, "Cliente Generator", true);
 	   
 		clienteGenerator.schedule(new TimeSpan(0));
-		
 	}
 
 	@Override
@@ -87,6 +85,11 @@ public class Modelo extends Model {
 	public double getTiempoServicioCocineros() 
 	{
 		return TiempoServicioCocineros.sample();
+	}
+	
+	public double TiempoPagoClientes() 
+	{
+		return TiempoPagoClientes.sample();
 	}
 	
 	public static void main(java.lang.String[] args) {
