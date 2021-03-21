@@ -12,7 +12,7 @@
 
 # Package Files #
 *.idea
-
+*.iml
 *.war
 *.nar
 *.ear
