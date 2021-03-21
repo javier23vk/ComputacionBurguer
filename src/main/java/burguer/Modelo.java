@@ -19,7 +19,7 @@ public class Modelo extends Model {
 
 	protected Queue<Cliente> colaClientesEsperandoComida;
 	protected Queue<Dependiente> colaDependientesEsperandoComida;
-	protected Queue<Cliente> colaDependienteEsperandoPago;
+	protected Queue<Dependiente> colaDependienteEsperandoPago;
 
 
 
@@ -50,7 +50,7 @@ public class Modelo extends Model {
 		TiempoServicioCocineros= new ContDistExponential(this, "TiempoServicioCocinerosStream",
                 9.0, true, false);
 		TiempoPagoClientes= new ContDistExponential(this, "TiempoPagoClientesStream",
-                4.0, true, false);
+                2.0, true, false);
 		
 		
 		TiempoLlegadaClientes.setNonNegative(true);
