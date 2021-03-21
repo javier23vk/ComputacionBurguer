@@ -11,6 +11,8 @@ public class Modelo extends Model {
 	private ContDistExponential TiempoLlegadaClientes;
 	private ContDistExponential TiempoServicioDependientes;
 	private ContDistExponential TiempoServicioCocineros;
+	private ContDistExponential TiempoPagoClientes;
+	
 	protected Queue<Cliente> colaClientes;
 	protected Queue<Dependiente> colaDependientes;
 	protected Queue<Cocinero> colaCocineros;
@@ -27,25 +29,29 @@ public class Modelo extends Model {
 
 	@Override
 	public void doInitialSchedules() {
-		GeneradorEventoClientes clienteGenerator =
-	            new GeneradorEventoClientes(this, "Cliente Generator", true);
+		ClienteGenerator clienteGenerator =
+	            new ClienteGenerator(this, "Cliente Generator", true);
 	   
-		clienteGenerator.schedule(new TimeSpan(0), TimeUnit.MINUTES);
+		clienteGenerator.schedule(new TimeSpan(0));
 		
 	}
 
 	@Override
 	public void init() {
 		TiempoLlegadaClientes= new ContDistExponential(this, "TiempoLlegadaClientesStream",
-                   3.0, true, false);
+                   5.0, true, false);
 		TiempoServicioDependientes= new ContDistExponential(this, "TiempoServicioDependientessStream",
-                3.0, true, false);
+                4.0, true, false);
 		TiempoServicioCocineros= new ContDistExponential(this, "TiempoServicioCocinerosStream",
-                3.0, true, false);
+                9.0, true, false);
+		TiempoPagoClientes= new ContDistExponential(this, "TiempoPagoClientesStream",
+                4.0, true, false);
+		
 		
 		TiempoLlegadaClientes.setNonNegative(true);
 		TiempoServicioDependientes.setNonNegative(true);
 		TiempoServicioCocineros.setNonNegative(true);
+		TiempoPagoClientes.setNonNegative(true);
 		
 		
 		colaClientes = new Queue<Cliente>(this, "Clientes Queue", true, true);

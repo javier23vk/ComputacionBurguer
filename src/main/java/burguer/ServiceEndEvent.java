@@ -12,7 +12,7 @@ public class ServiceEndEvent extends EventOf2Entities<Dependiente, Cliente> {
 
 	public ServiceEndEvent(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
-		// TODO Auto-generated constructor stub
+		myModel = (Modelo)owner;
 	}
 
 	@Override

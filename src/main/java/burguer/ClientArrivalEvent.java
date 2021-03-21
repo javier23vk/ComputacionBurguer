@@ -13,7 +13,7 @@ public class ClientArrivalEvent extends Event<Cliente> {
 
 	public ClientArrivalEvent(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
-		// TODO Auto-generated constructor stub
+		myModel = (Modelo)owner;
 	}
 
 	@Override
