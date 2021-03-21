@@ -26,7 +26,7 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 	          //Realizar_pedido event = new Realizar_pedido(myModel, "ServiceEndEvent", true);
 	          PagarPedido event =  new PagarPedido(myModel, "PagarPedidoEvent", true);
 	          // and schedule it for at the appropriate time
-	          event.schedule(dep, nextClient, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+	          event.schedule(nextClient, dep, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
 	      }
 	      else {
 	          // NO, there are no clientes waiting
