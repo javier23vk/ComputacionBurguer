@@ -19,7 +19,7 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 	@Override
 	public void eventRoutine(Dependiente dep, Cliente cli) {
 	      sendTraceNote(cli + " leaves the terminal");
-	      if (!myModel.colaClientes.isEmpty() && !myModel.colaDependientes.isEmpty()) {
+	      if (!myModel.colaClientes.isEmpty() && !myModel.colaDependientes.isEmpty() && !myModel.colaCocineros.isEmpty()) {
 	    	  // Coges el cliente
 	          Cliente client = myModel.colaClientes.first();
 	          myModel.colaClientes.remove(client);
@@ -41,8 +41,9 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 	          RecogerComida recogerEvento = new RecogerComida(myModel,"recoger Comida",true);
 	          // lanzar eventos
 	          event.schedule(client, depend, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+
+
 			  Cocinero coci = myModel.colaCocineros.first();
-			  myModel.colaCocineros.remove(coci);
 			  prepaEvent.schedule(coci,new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
 	      }
 	      else {
