@@ -20,17 +20,13 @@ public class ClientArrivalEvent extends Event<Cliente> {
 	public void eventRoutine(Cliente cli) throws SuspendExecution {
 	myModel.colaClientes.insert(cli);
     sendTraceNote("ClientQueueLength: "+ myModel.colaClientes.length());
-    if(!myModel.colaDependientes.isEmpty())
-    {
-    	Dependiente dep= myModel.colaDependientes.first();
-    	myModel.colaDependientes.remove(dep);
-    	
-    	myModel.colaClientes.remove(cli);
-    	RealizarPedido serviceEnd = new RealizarPedido(myModel,
-                "ServiceEndEvent", true);
-        serviceEnd.schedule(dep, cli, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
 
-    }
+
+    	
+    RealizarPedido serviceEnd = new RealizarPedido(myModel,"ServiceEndEvent", true);
+    Dependiente dep = new Dependiente(myModel, "Dependiente", true);
+	serviceEnd.schedule(dep, cli, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+
 
 
 	}

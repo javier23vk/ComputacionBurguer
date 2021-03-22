@@ -1,7 +1,8 @@
 package burguer;
 
-import java.util.concurrent.TimeUnit;
 
+
+import java.util.concurrent.TimeUnit;
 import desmoj.core.simulator.EventOf2Entities;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
@@ -18,15 +19,32 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 	@Override
 	public void eventRoutine(Dependiente dep, Cliente cli) {
 	      sendTraceNote(cli + " leaves the terminal");
-	      if (!myModel.colaClientes.isEmpty()) {
-	    	  // remove the first waiting truck from the queue
-	          Cliente nextClient = myModel.colaClientes.first();
-	          myModel.colaClientes.remove(nextClient);
-	          
-	          //Realizar_pedido event = new Realizar_pedido(myModel, "ServiceEndEvent", true);
+	      if (!myModel.colaClientes.isEmpty() && !myModel.colaDependientes.isEmpty() && !myModel.colaCocineros.isEmpty()) {
+	    	  // Coges el cliente
+	          Cliente client = myModel.colaClientes.first();
+	          myModel.colaClientes.remove(client);
+
+	          //meto el cliente a espera de comida
+	          myModel.colaClientesEsperandoComida.insert(client);
+	          //coges el dependiente
+	          Dependiente depend = myModel.colaDependientes.first();
+			  myModel.colaDependientes.remove(depend);
+
+			  //metes el dependiente en la cola de esperar comida
+			  myModel.colaDependientesEsperandoComida.insert(depend);
+
+
+
+			  // Creas el evento de pagar y preparar comida
 	          PagarPedido event =  new PagarPedido(myModel, "PagarPedidoEvent", true);
-	          // and schedule it for at the appropriate time
-	          event.schedule(nextClient, dep, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+	          PrepararHamburguesa prepaEvent= new PrepararHamburguesa(myModel,"PrepararPedidoEvent",true);
+	          RecogerComida recogerEvento = new RecogerComida(myModel,"recoger Comida",true);
+	          // lanzar eventos
+	          event.schedule(client, depend, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+
+
+			  Cocinero coci = myModel.colaCocineros.first();
+			  prepaEvent.schedule(coci,new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
 	      }
 	      else {
 	          // NO, there are no clientes waiting
