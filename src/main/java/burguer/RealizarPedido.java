@@ -41,10 +41,12 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 	          RecogerComida recogerEvento = new RecogerComida(myModel,"recoger Comida",true);
 	          // lanzar eventos
 	          event.schedule(client, depend, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+			  double tiempo = myModel.getTiempoServicioCocineros();
 
-
+			  recogerEvento.schedule(dep,new TimeSpan(tiempo, TimeUnit.MINUTES));
 			  Cocinero coci = myModel.colaCocineros.first();
-			  prepaEvent.schedule(coci,new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
+
+			  prepaEvent.schedule(coci,new TimeSpan(tiempo, TimeUnit.MINUTES));
 	      }
 	      else {
 	          // NO, there are no clientes waiting
