@@ -22,10 +22,15 @@ public class ClientArrivalEvent extends Event<Cliente> {
     sendTraceNote("ClientQueueLength: "+ myModel.colaClientes.length());
 
 
-    	
-    RealizarPedido serviceEnd = new RealizarPedido(myModel,"ServiceEndEvent", true);
-    Dependiente dep = new Dependiente(myModel, "Dependiente", true);
-	serviceEnd.schedule(dep, cli, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+    if (!myModel.colaDependientes.isEmpty()){
+
+		Dependiente dependiente = myModel.colaDependientes.first();
+		myModel.colaDependientes.remove(dependiente);
+		myModel.colaClientes.remove( cli);
+		RealizarPedido serviceEnd = new RealizarPedido(myModel,"ServiceEndEvent", true);
+		serviceEnd.schedule(dependiente, cli, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+
+	}
 
 
 
