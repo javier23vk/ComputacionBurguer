@@ -1,7 +1,6 @@
 package burguer;
 
-import co.paralleluniverse.fibers.SuspendExecution;
-import desmoj.core.simulator.Event;
+
 import desmoj.core.simulator.EventOf2Entities;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;

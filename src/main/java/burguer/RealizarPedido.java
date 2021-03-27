@@ -22,11 +22,11 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 		myModel.colaPedidos.insert(dep);
 		if (!myModel.colaCocineros.isEmpty())
 		{
-			Cocinero cocinero = myModel.colaCocineros.first();
-			myModel.colaCocineros.remove(cocinero);
+			Cocinero coc = myModel.colaCocineros.first();
+			myModel.colaCocineros.remove(coc);
 			myModel.colaPedidos.remove(dep);
 			PrepararHamburguesa event = new PrepararHamburguesa(myModel, "PrepararHamburguesa", true);
-			event.schedule(cocinero, dep, new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
+			event.schedule(coc, dep, new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
 		}
 
 	}
