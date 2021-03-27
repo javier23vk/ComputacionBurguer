@@ -99,7 +99,7 @@ public class Modelo extends Model {
 		return TiempoServicioCocineros.sample();
 	}
 	
-	public double TiempoPagoClientes() 
+	public double getTiempoPagoClientes() 
 	{
 		return TiempoPagoClientes.sample();
 	}

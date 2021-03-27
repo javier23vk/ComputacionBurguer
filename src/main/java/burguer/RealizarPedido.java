@@ -47,6 +47,32 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 
 			  prepaEvent.schedule(coci,new TimeSpan(tiempo, TimeUnit.MINUTES));
 	      }
+	      
+	      
+	      
+	      
+	      
+	      
+	      sendTraceNote(cli + " es atendido y ha solicitado su hamburguesa");
+	        myModel.colaDependientes.insert(dep);
+	        
+			// comprueba si hay cocineros ociosos
+			if (!myModel.colaCocineros.isEmpty())
+			{
+				// SI, hay un cocinero libre
+
+				// el primer cocinero deja de estar ocioso para cocinar
+				Cocinero cocinero = myModel.colaCocineros.first();
+				myModel.colaCocineros.remove(cocinero);
+				
+				// el dependiente ya no esta pendiente
+				myModel.colaDependientes.remove(dep);
+
+				// creamos un nuevo evento para que cocine
+				PrepararHamburguesa event = new PrepararHamburguesa(myModel, "PrepararHamburguesa", true);
+	 			// se programa el tiempo necesario para que termine de cocinar
+				event.schedule(cocinero, dep, new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
+			}
 
 	}
 

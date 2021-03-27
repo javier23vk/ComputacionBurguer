@@ -18,17 +18,21 @@ public class PagarPedido extends EventOf2Entities<Cliente, Dependiente> {
 
 	@Override
 	public void eventRoutine(Cliente cli, Dependiente dep) {
+				if (!myModel.colaClientes.isEmpty())
+				{		
+					Cliente nextCliente = myModel.colaClientes.first();
+					myModel.colaClientes.remove(nextCliente);
 
-		if(!myModel.colaDependienteEsperandoPago.isEmpty() && !myModel.colaClientesEsperandoComida.isEmpty()){
-			Dependiente depend = myModel.colaDependienteEsperandoPago.first();
-			myModel.colaDependienteEsperandoPago.remove(depend);
-			Cliente client = myModel.colaClientesEsperandoComida.first();
-			myModel.colaClientesEsperandoComida.remove(client);
+					RealizarPedido event = new RealizarPedido(myModel, "RealizarPedido", true);
+					event.schedule(dep, nextCliente, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+				}
+				else {
+					myModel.colaDependientes.insert(dep);
+				}
+		
 
-			myModel.colaDependientes.insert(depend);
-			RealizarPedido pg = new RealizarPedido(myModel,"Vuelta normal",true);
-			pg.schedule(dep,cli,new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
-		}
+
+		
 	}
 
 }
