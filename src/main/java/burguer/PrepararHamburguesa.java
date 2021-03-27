@@ -20,7 +20,8 @@ public class PrepararHamburguesa extends Event<Cocinero> {
 	@Override
 	public void eventRoutine(Cocinero coc) throws SuspendExecution {
 		// TODO Auto-generated method stub
-		if(!myModel.colaCocineros.isEmpty()){
+		//if(!myModel.colaCocineros.isEmpty()){
+		if(!myModel.colaClientesEsperandoComida.isEmpty()){
 			Cocinero coci = myModel.colaCocineros.first();
 			myModel.colaCocineros.remove(coci);
 			myModel.colaCocineroComidaLista.insert(coci);
