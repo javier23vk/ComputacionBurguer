@@ -29,7 +29,7 @@ public class RecogerComida extends Event<Dependiente> {
         myModel.colaDependienteEsperandoPago.insert(dep);
 
         PagarPedido pg = new PagarPedido(myModel,"Esperando pago",true);
-        pg.schedule(myModel.colaClientesEsperandoComida.first(),dep);
+        pg.schedule(myModel.colaClientesEsperandoComida.first(),dep,new TimeSpan(myModel.getTiempoPagoClientes(), TimeUnit.MINUTES));
 
 
     }

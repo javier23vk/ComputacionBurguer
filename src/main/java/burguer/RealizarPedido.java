@@ -18,7 +18,6 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 
 	@Override
 	public void eventRoutine(Dependiente dep, Cliente cli) {
-	      sendTraceNote(cli + " leaves the terminal");
 	      if (!myModel.colaClientes.isEmpty() && !myModel.colaDependientes.isEmpty() && !myModel.colaCocineros.isEmpty()) {
 	    	  // Coges el cliente
 	          Cliente client = myModel.colaClientes.first();
@@ -36,26 +35,18 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 
 
 			  // Creas el evento de pagar y preparar comida
-	          PagarPedido event =  new PagarPedido(myModel, "PagarPedidoEvent", true);
+	          //PagarPedido event =  new PagarPedido(myModel, "PagarPedidoEvent", true);
 	          PrepararHamburguesa prepaEvent= new PrepararHamburguesa(myModel,"PrepararPedidoEvent",true);
-	          RecogerComida recogerEvento = new RecogerComida(myModel,"recoger Comida",true);
+	          //RecogerComida recogerEvento = new RecogerComida(myModel,"recoger Comida",true);
 	          // lanzar eventos
-	          event.schedule(client, depend, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+	          //event.schedule(client, depend, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
 			  double tiempo = myModel.getTiempoServicioCocineros();
 
-			  recogerEvento.schedule(dep,new TimeSpan(tiempo, TimeUnit.MINUTES));
+			  //recogerEvento.schedule(dep,new TimeSpan(tiempo, TimeUnit.MINUTES));
 			  Cocinero coci = myModel.colaCocineros.first();
 
 			  prepaEvent.schedule(coci,new TimeSpan(tiempo, TimeUnit.MINUTES));
 	      }
-	      else {
-	          // NO, there are no clientes waiting
-
-	          // --> the van carrier is placed on its parking spot
-	          myModel.colaDependientes.insert(dep);
-
-	          // the VC is now waiting for a new customer to arrive
-	       }
 
 	}
 

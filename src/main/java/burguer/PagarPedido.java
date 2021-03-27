@@ -27,7 +27,7 @@ public class PagarPedido extends EventOf2Entities<Cliente, Dependiente> {
 
 			myModel.colaDependientes.insert(depend);
 			RealizarPedido pg = new RealizarPedido(myModel,"Vuelta normal",true);
-			pg.schedule(dep,cli,new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
+			pg.schedule(dep,cli);
 		}
 	}
 
