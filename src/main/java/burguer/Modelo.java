@@ -17,10 +17,6 @@ public class Modelo extends Model {
 	protected Queue<Dependiente> colaDependientes;
 	protected Queue<Cocinero> colaCocineros;
 
-	protected Queue<Cliente> colaClientesEsperandoComida;
-	protected Queue<Dependiente> colaDependientesEsperandoComida;
-	protected Queue<Dependiente> colaDependienteEsperandoPago;
-	protected Queue<Cocinero> colaCocineroComidaLista;
 
 
 
@@ -62,11 +58,6 @@ public class Modelo extends Model {
 		colaClientes = new Queue<Cliente>(this, "Clientes Queue", true, true);
 		colaDependientes = new Queue<Dependiente>(this, "Dependientes Queue", true, true);
 		colaCocineros = new Queue<Cocinero>(this, "Cocineros Queue", true, true);
-
-		 colaClientesEsperandoComida= new Queue<Cliente>(this, "colaClientesEsperandoComida", true, true);
-		 colaDependientesEsperandoComida= new Queue<Dependiente>(this, "colaDependientesEsperandoComida", true, true);
-		 colaDependienteEsperandoPago=new Queue<Dependiente>(this, "colaDependienteEsperandoPago", true, true);
-		 colaCocineroComidaLista=new Queue<Cocinero>(this, "colaCocineroComidaLista", true, true);
 
 		Dependiente dep;
 		for (int i = 0; i < NUM_DEPENDIENTES ; i++)

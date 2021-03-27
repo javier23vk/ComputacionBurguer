@@ -1,12 +1,13 @@
 package burguer;
 
+import desmoj.core.simulator.Event;
 import desmoj.core.simulator.EventOf2Entities;
 import desmoj.core.simulator.Model;
 import desmoj.core.simulator.TimeSpan;
 
 import java.util.concurrent.TimeUnit;
 
-public class PagarPedido extends EventOf2Entities<Cliente, Dependiente> {
+public class PagarPedido extends Event< Dependiente> {
 
 	private Modelo myModel;
 
@@ -17,12 +18,11 @@ public class PagarPedido extends EventOf2Entities<Cliente, Dependiente> {
 	}
 
 	@Override
-	public void eventRoutine(Cliente cli, Dependiente dep) {
+	public void eventRoutine(Dependiente dep) {
 				if (!myModel.colaClientes.isEmpty())
 				{		
 					Cliente nextCliente = myModel.colaClientes.first();
 					myModel.colaClientes.remove(nextCliente);
-
 					RealizarPedido event = new RealizarPedido(myModel, "RealizarPedido", true);
 					event.schedule(dep, nextCliente, new TimeSpan(myModel.getTiempoServicioDependientes(), TimeUnit.MINUTES));
 				}

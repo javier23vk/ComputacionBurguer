@@ -19,32 +19,18 @@ public class PrepararHamburguesa extends EventOf2Entities<Cocinero, Dependiente>
 	}
 
 	@Override
-	public void eventRoutine(Cocinero arg0, Dependiente arg1) {
+	public void eventRoutine(Cocinero coc, Dependiente dep) {
 
-		// Entregar al dependiente que estaba esperandome
-		// El dependiente cobra
-		EventoPago event = new EventoPago(myModel, "Evento Pago", true);
-		// lo programamos en la lista de eventos
-		event.schedule(dependiente, new TimeSpan(myModel.getTiempoPago()));
-		
-		
-		//Atender al siguiente
-		if (!myModel.colaPedidosPendientes.isEmpty()) {
-			Dependiente nextDependiente = myModel.colaPedidosPendientes.first();
-			// Y eliminar al dependiente de la cola de espera
-			myModel.colaPedidosPendientes.remove(nextDependiente);
-			
-			// creamos un nuevo evento para que cocine
-			EventoCocina nextEvent = new EventoCocina(myModel, "Evento Cocina", true);
- 			// se programa el tiempo necesario para que termine de cocinar
-			nextEvent.schedule(cocinero, nextDependiente, new TimeSpan(myModel.getTiempoCocina(), TimeUnit.MINUTES));
+		PagarPedido event = new PagarPedido(myModel, "PagarPedido", true);
+		event.schedule( dep, new TimeSpan(myModel.getTiempoPagoClientes()));
+
+		if (!myModel.colaDependientes.isEmpty()) {
+			Dependiente nextDependiente = myModel.colaDependientes.first();
+			myModel.colaDependientes.remove(nextDependiente);
+			PrepararHamburguesa nextEvent = new PrepararHamburguesa(myModel, "PrepararHamburguesa", true);
+			nextEvent.schedule(coc, nextDependiente, new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
 		}else {
-			// NO, no hay ningun pedido esperando
-
-			// el dependiente se incluye en la cola de dependientes ociosos
-			myModel.colaCocinerosOciosos.insert(cocinero);
-
-			// ahora esta esperando a que llegue algun dependiente
+			myModel.colaCocineros.insert(coc);
 		}
 	}
 
