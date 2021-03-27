@@ -34,7 +34,6 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 			  myModel.colaDependientesEsperandoComida.insert(depend);
 
 
-
 			  // Creas el evento de pagar y preparar comida
 	          PagarPedido event =  new PagarPedido(myModel, "PagarPedidoEvent", true);
 	          PrepararHamburguesa prepaEvent= new PrepararHamburguesa(myModel,"PrepararPedidoEvent",true);
@@ -48,14 +47,6 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 
 			  prepaEvent.schedule(coci,new TimeSpan(tiempo, TimeUnit.MINUTES));
 	      }
-	      else {
-	          // NO, there are no clientes waiting
-
-	          // --> the van carrier is placed on its parking spot
-	          myModel.colaDependientes.insert(dep);
-
-	          // the VC is now waiting for a new customer to arrive
-	       }
 
 	}
 
