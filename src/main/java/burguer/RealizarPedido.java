@@ -33,7 +33,6 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 			  myModel.colaDependientesEsperandoComida.insert(depend);
 
 
-
 			  // Creas el evento de pagar y preparar comida
 	          //PagarPedido event =  new PagarPedido(myModel, "PagarPedidoEvent", true);
 	          PrepararHamburguesa prepaEvent= new PrepararHamburguesa(myModel,"PrepararPedidoEvent",true);

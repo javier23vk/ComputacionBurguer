@@ -13,11 +13,11 @@ public class ClienteGenerator extends ExternalEvent {
 	}
 
 	public void eventRoutine() {
-		// TODO Auto-generated method stub
-		Modelo model = (Modelo)getModel();
-		Cliente cli= new Cliente(model, "Cliente",true);
+
+		Modelo model = (Modelo) this.getModel();
+		Cliente cli = new Cliente(model, "Cliente",true);
 		ClientArrivalEvent clientArrival= new ClientArrivalEvent(model,"ClientArrivalEvent",true);
-		clientArrival.schedule(cli,new TimeSpan(0, TimeUnit.MINUTES));
+		clientArrival.schedule(cli, new TimeSpan(0, TimeUnit.MINUTES));
 	    schedule(new TimeSpan(model.getTiempoLlegadaClientes(), TimeUnit.MINUTES));
 	}
 }
