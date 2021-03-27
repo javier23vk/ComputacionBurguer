@@ -14,11 +14,9 @@ public class EntregaComida extends Event<Cocinero> {
     }
 
     public void eventRoutine(Cocinero cocinero) throws SuspendExecution {
-    if(!myModel.colaCocineroComidaLista.isEmpty()){
 
 
         RecogerComida event = new RecogerComida(myModel,"comida lista entrega",true);
         event.schedule(new Dependiente(myModel,"dep",true));
-    }
     }
 }

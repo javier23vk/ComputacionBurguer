@@ -111,7 +111,7 @@ public class Modelo extends Model {
 		Experiment exp = new Experiment("BurguerExperiment");
 		model.connectToExperiment(exp);
 		exp.setShowProgressBar(true); 
-		exp.stop(new TimeInstant(1500, TimeUnit.MINUTES));   
+		exp.stop(new TimeInstant(1500, TimeUnit.MINUTES));
 		exp.tracePeriod(new TimeInstant(0), new TimeInstant(100, TimeUnit.MINUTES));
 		exp.debugPeriod(new TimeInstant(0), new TimeInstant(50, TimeUnit.MINUTES));
 		exp.start();

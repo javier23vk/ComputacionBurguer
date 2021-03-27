@@ -19,7 +19,7 @@ public class PagarPedido extends EventOf2Entities<Cliente, Dependiente> {
 	@Override
 	public void eventRoutine(Cliente cli, Dependiente dep) {
 
-		if(!myModel.colaDependienteEsperandoPago.isEmpty() && !myModel.colaClientesEsperandoComida.isEmpty()){
+		if( !myModel.colaClientesEsperandoComida.isEmpty()){
 			Dependiente depend = myModel.colaDependienteEsperandoPago.first();
 			myModel.colaDependienteEsperandoPago.remove(depend);
 			Cliente client = myModel.colaClientesEsperandoComida.first();

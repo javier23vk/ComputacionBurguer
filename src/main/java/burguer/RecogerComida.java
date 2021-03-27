@@ -17,8 +17,7 @@ public class RecogerComida extends Event<Dependiente> {
     }
 
     public void eventRoutine(Dependiente dependiente) throws SuspendExecution {
-    if(!myModel.colaDependientesEsperandoComida.isEmpty() && !myModel.colaCocineroComidaLista.isEmpty())
-    {
+
         Cocinero coci = myModel.colaCocineroComidaLista.first();
         myModel.colaCocineroComidaLista.remove(coci);
         myModel.colaCocineros.insert(coci);
@@ -32,6 +31,5 @@ public class RecogerComida extends Event<Dependiente> {
         pg.schedule(myModel.colaClientesEsperandoComida.first(),dep,new TimeSpan(myModel.getTiempoPagoClientes(), TimeUnit.MINUTES));
 
 
-    }
     }
 }
