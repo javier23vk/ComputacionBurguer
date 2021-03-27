@@ -19,9 +19,6 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 	@Override
 	public void eventRoutine(Dependiente dep, Cliente cli) {
 
-		sendTraceNote(cli + " es atendido y ha solicitado su hamburguesa");
-		myModel.colaDependientes.insert(dep);
-
 		if (!myModel.colaCocineros.isEmpty())
 		{
 			Cocinero cocinero = myModel.colaCocineros.first();
