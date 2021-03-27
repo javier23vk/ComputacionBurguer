@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 import desmoj.core.dist.*;
 public class Modelo extends Model {
 
-	protected static int NUM_DEPENDIENTES = 5;
-	protected static int NUM_COCINEROS = 1;
+	protected static int NUM_DEPENDIENTES = 4;
+	protected static int NUM_COCINEROS = 2;
 	private ContDistExponential TiempoLlegadaClientes;
 	private ContDistExponential TiempoServicioDependientes;
 	private ContDistExponential TiempoServicioCocineros;
@@ -16,6 +16,7 @@ public class Modelo extends Model {
 	protected Queue<Cliente> colaClientes;
 	protected Queue<Dependiente> colaDependientes;
 	protected Queue<Cocinero> colaCocineros;
+	protected Queue<Dependiente> colaPedidos;
 
 
 
@@ -58,6 +59,7 @@ public class Modelo extends Model {
 		colaClientes = new Queue<Cliente>(this, "Clientes Queue", true, true);
 		colaDependientes = new Queue<Dependiente>(this, "Dependientes Queue", true, true);
 		colaCocineros = new Queue<Cocinero>(this, "Cocineros Queue", true, true);
+		colaPedidos = new Queue<Dependiente>(this, "Pedidos Queue", true, true);
 
 		Dependiente dep;
 		for (int i = 0; i < NUM_DEPENDIENTES ; i++)

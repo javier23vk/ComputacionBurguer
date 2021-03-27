@@ -19,11 +19,12 @@ public class RealizarPedido extends EventOf2Entities<Dependiente, Cliente> {
 	@Override
 	public void eventRoutine(Dependiente dep, Cliente cli) {
 
+		myModel.colaPedidos.insert(dep);
 		if (!myModel.colaCocineros.isEmpty())
 		{
 			Cocinero cocinero = myModel.colaCocineros.first();
 			myModel.colaCocineros.remove(cocinero);
-			myModel.colaDependientes.remove(dep);
+			myModel.colaPedidos.remove(dep);
 			PrepararHamburguesa event = new PrepararHamburguesa(myModel, "PrepararHamburguesa", true);
 			event.schedule(cocinero, dep, new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
 		}

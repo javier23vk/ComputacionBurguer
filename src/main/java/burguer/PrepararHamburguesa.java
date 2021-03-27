@@ -24,9 +24,9 @@ public class PrepararHamburguesa extends EventOf2Entities<Cocinero, Dependiente>
 		PagarPedido event = new PagarPedido(myModel, "PagarPedido", true);
 		event.schedule( dep, new TimeSpan(myModel.getTiempoPagoClientes()));
 
-		if (!myModel.colaDependientes.isEmpty()) {
-			Dependiente nextDependiente = myModel.colaDependientes.first();
-			myModel.colaDependientes.remove(nextDependiente);
+		if (!myModel.colaPedidos.isEmpty()) {
+			Dependiente nextDependiente = myModel.colaPedidos.first();
+			myModel.colaPedidos.remove(nextDependiente);
 			PrepararHamburguesa nextEvent = new PrepararHamburguesa(myModel, "PrepararHamburguesa", true);
 			nextEvent.schedule(coc, nextDependiente, new TimeSpan(myModel.getTiempoServicioCocineros(), TimeUnit.MINUTES));
 		}else {
